@@ -39,9 +39,13 @@ func main() {
 
 	router := setupRouter()
 
+	// Added read/write timeouts to avoid hanging connections
 	server := &http.Server{
-		Addr:    addr,
-		Handler: router,
+		Addr:         addr,
+		Handler:      router,
+		ReadTimeout:  10 * 1e9, // 10 seconds in nanoseconds (time.Duration)
+		WriteTimeout: 10 * 1e9,
+		IdleTimeout:  60 * 1e9,
 	}
 
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
