@@ -25,7 +25,7 @@ func main() {
 
 	// Default port changed to 8080 to avoid conflicts with other local services on 3000
 	port := getEnv("PORT", "8080")
-	host := getEnv("HOST", "0.0.0.0")
+	host := getEnv("HOST", "127.0.0.1") // personal preference: bind to localhost only by default
 
 	// Validate port is a valid number
 	if _, err := strconv.Atoi(port); err != nil {
